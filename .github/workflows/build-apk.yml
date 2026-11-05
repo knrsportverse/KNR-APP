@@ -11,6 +11,7 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
 
@@ -19,24 +20,30 @@ jobs:
           distribution: temurin
           java-version: 17
 
-      - uses: android-actions/setup-android@v3
-
-      - uses: gradle/actions/setup-gradle@v4
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
         with:
-          gradle-version: 8.9
+          packages: |
+            cmdline-tools;latest
+            platform-tools
+            platforms;android-34
+            build-tools;34.0.0
+
+      - name: Accept Android licenses
+        run: yes | sdkmanager --licenses
 
       - name: Build debug APK
-        run: gradle assembleDebug --no-daemon
+        run: ./gradlew assembleDebug --no-daemon
 
       - name: Rename APK
         run: cp app/build/outputs/apk/debug/app-debug.apk KNR-Sportverse.apk
 
-      - uses: actions/upload-artifact@v4
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v4
         with:
           name: KNR-Sportverse-APK
           path: KNR-Sportverse.apk
 
-      # Publishes a permanent direct-download link under the repo's Releases page
       - name: Publish release
         uses: softprops/action-gh-release@v2
         with:
