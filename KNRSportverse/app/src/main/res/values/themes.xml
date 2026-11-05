@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.KNR" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/knr_blue</item>
+        <item name="colorPrimaryDark">@color/knr_blue</item>
+        <item name="colorAccent">@color/knr_red</item>
+        <item name="android:statusBarColor">@color/knr_blue</item>
+    </style>
+
+    <style name="Theme.KNR.Splash">
+        <item name="android:windowBackground">@android:color/white</item>
+        <item name="android:statusBarColor">@android:color/white</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:navigationBarColor">@android:color/white</item>
+    </style>
+</resources>
